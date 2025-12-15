@@ -6,11 +6,15 @@
       <input [(ngModel)]="pattern" type="text" class="form-control" placeholder="City name" aria-label="Recipient's username" aria-describedby="button-addon2">
       <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
     </div>
+    <div class="input-group mb-3">
+      <input [(ngModel)]="degrees" type="text" class="form-control" placeholder="Colder than..." aria-label="Recipient's username" aria-describedby="button-addon2">
+      <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+    </div>
   </div>
 </div>
 
 <div class="row row-cols-md-5">
-	@for (city of getFavoriteCities() | favCityByPattern:pattern; track city.id) {
-		{{city.name}}
+	@for (city of getFavoriteCities() | favCityByPattern:pattern | favCityByColderTemp:degrees; track city.id) {
+		<app-city-card [city]="city"></app-city-card>
 	}
 </div>

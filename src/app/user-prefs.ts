@@ -22,10 +22,15 @@ export class UserPrefs {
   }
 
   removeCityFromMyCities(id:string) {
-    const index = this.myCities.indexOf(id);
-    if (index !== -1) {
-      this.myCities.splice(index, 1);
-      localStorage.setItem('myCities', JSON.stringify(this.myCities));
-    }
+    // const index = this.myCities.findIndex(c => c.id == id);
+
+    // if (index >= 0) {
+    //   this.myCities.splice(index, 1);
+    //   localStorage.setItem('myCities', JSON.stringify(this.myCities));
+    // }
+
+    //todo lo comentado equivale a estas 2 lineas
+    this.myCities = this.myCities.filter(c => c.id != id);
+    localStorage.setItem('myCities', JSON.stringify(this.myCities));
   }
 }
