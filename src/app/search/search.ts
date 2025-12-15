@@ -14,8 +14,8 @@ export class Search {
   private userPrefs = inject(UserPrefs)
   private results:any[] = []
 
-  addCityToMyCities(id:string) {
-    this.userPrefs.addCityToMyCities(id)
+  addCityToMyCities(city:any) {
+    this.userPrefs.addCityToMyCities(city)
   }
 
   isAlreadyInMyCities(id:string) {

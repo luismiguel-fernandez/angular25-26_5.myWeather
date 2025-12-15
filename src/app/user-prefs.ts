@@ -4,17 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserPrefs {
-  private myCities: string[] = JSON.parse(localStorage.getItem('myCities') || "[]");
+  private myCities: any[] = JSON.parse(localStorage.getItem('myCities') || "[]");
   
-  addCityToMyCities(id:string) {
-    if (this.myCities.indexOf(id) === -1) {
-      this.myCities.push(id);
+  addCityToMyCities(city:any) {
+    if (this.myCities.indexOf(city) === -1) {
+      this.myCities.push(city);
       localStorage.setItem('myCities', JSON.stringify(this.myCities));
     }
   }
 
+  getFavoriteCities() {
+    return this.myCities;
+  }
+
   isAlreadyInMyCities(id:string) {
-    return this.myCities.indexOf(id) !== -1;
+    return this.myCities.find(city => city.id == id);
   }
 
   removeCityFromMyCities(id:string) {
