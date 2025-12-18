@@ -1,5 +1,5 @@
 <?php
-// ... (Configuración de conexión PDO igual a los anteriores)
+require_once 'connection.php';
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

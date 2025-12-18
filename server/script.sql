@@ -1,6 +1,6 @@
 -- 1. Crear la base de datos (opcional si ya existe)
-CREATE DATABASE IF NOT EXISTS gestion_usuarios;
-USE gestion_usuarios;
+CREATE DATABASE IF NOT EXISTS weather_backend;
+USE weather_backend;
 
 -- 2. Tabla de Usuarios
 -- El campo 'password_hash' tiene longitud de 255 para soportar algoritmos como bcrypt o argon2
