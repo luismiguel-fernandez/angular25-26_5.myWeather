@@ -3,33 +3,33 @@ require_once 'connection.php';
 
 try {
     $pdo = new PDO($dsn, $user, $password, $options);
-
-    // Comprobamos si la solicitud se realizó mediante POST
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        // Obtenemos los datos del array $_POST
-        $user_login = $_POST['usuario'] ?? '';
-        $user_pass  = $_POST['password'] ?? '';
-
-        if (empty($user_login) || empty($user_pass)) {
-            echo "Por favor, completa todos los campos.";
-        } else {
-            // Buscamos al usuario por su nombre de usuario
-            $stmt = $pdo->prepare("SELECT id, password_hash FROM usuarios WHERE username = ?");
-            $stmt->execute([$user_login]);
-            $usuario = $stmt->fetch();
-
-            // Verificamos el hash de la contraseña
-            if ($usuario && password_verify($user_pass, $usuario['password_hash'])) {
-                echo "Login exitoso. Bienvenido.";
-                
-                // Aquí podrías redirigir o iniciar sesión
-            } else {
-                echo "Usuario o contraseña incorrectos.";
-            }
-        }
-    }
 } catch (\PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
+    echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
+    exit;
 }
-?>
+
+// 2. Obtener y validar el ID de usuario (vía GET o POST)
+$usuario_id = isset($_GET['usuario_id']) ? intval($_GET['usuario_id']) : null;
+
+if (!$usuario_id) {
+    echo json_encode(["error" => "ID de usuario no proporcionado"]);
+    exit;
+}
+
+// 3. Consulta a la base de datos
+try {
+    $stmt = $pdo->prepare("SELECT id_ciudad_api FROM usuario_ciudades WHERE usuario_id = ?");
+    $stmt->execute([$usuario_id]);
+    
+    // Extraemos solo los valores numéricos en un array simple
+    $ciudades = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    // 4. Devolver el JSON
+    echo json_encode([
+        "usuario_id" => $usuario_id,
+        "ciudades_favoritas" => $ciudades
+    ]);
+
+} catch (\PDOException $e) {
+    echo json_encode(["error" => "Error en la consulta: " . $e->getMessage()]);
+}
