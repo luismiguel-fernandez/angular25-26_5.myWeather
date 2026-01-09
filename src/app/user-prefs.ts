@@ -1,15 +1,30 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserPrefs {
+
+  private http = inject(HttpClient)
   private myCities: any[] = JSON.parse(localStorage.getItem('myCities') || "[]");
   
   addCityToMyCities(city:any) {
     if (this.myCities.indexOf(city) === -1) {
       this.myCities.push(city);
       localStorage.setItem('myCities', JSON.stringify(this.myCities));
+      //insertar también en la BD mysql
+      alert("ahora viene la llamada HTTP")
+      this.http.post("http://localhost/dwec/weather/addCity.php", {
+        usuario_id: 1,
+        id_ciudad_api: city.id,
+        nombre_ciudad: city.name,
+        codigo_pais: city.sys.country
+      }).subscribe(
+        (data:any) => {
+          console.log(data)
+        }
+      )
     }
   }
 

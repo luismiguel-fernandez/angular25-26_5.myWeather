@@ -4,10 +4,10 @@ require_once 'connection.php';
 try {
     $pdo = new PDO($dsn, $user, $password, $options);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_GET['username']) && isset($_GET['password'])) {
         
-        $username = trim($_POST['username'] ?? '');
-        $password_plain = $_POST['password'] ?? '';
+        $username = trim($_GET['username'] ?? '');
+        $password_plain = $_GET['password'] ?? '';
 
         // Validación básica
         if (empty($username) || empty($password_plain)) {

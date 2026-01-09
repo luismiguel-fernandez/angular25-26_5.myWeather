@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Login } from "../login/login";
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [Login],
   templateUrl: './header.html',
   styles: `
     div {
