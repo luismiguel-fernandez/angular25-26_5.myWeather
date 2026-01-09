@@ -7,9 +7,9 @@ import { inject, Injectable } from '@angular/core';
 export class UserData {
   private http = inject(HttpClient)
 
-  login(username:string, password:string) {
+  tryLogin(username:string, password:string) {
     return this.http.post("http://localhost/weather/login.php", {
-      usuario: username,
+      usuario:  username,
       password: password
     });
   }

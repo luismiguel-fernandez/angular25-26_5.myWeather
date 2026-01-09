@@ -3,8 +3,8 @@
         <span>nombre de usuario</span>
         <button class="btn btn-outline-secondary">logout</button>
     } @else {
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+        <input #username type="text" class="form-control" placeholder="Username" aria-label="Username">
         <span class="input-group-text"></span>
-        <input type="text" class="form-control" placeholder="Password" aria-label="Server">
+        <input #password (keyup.enter)="tryLogin(username.value,password.value)" type="text" class="form-control" placeholder="Password" aria-label="Server">
     }
 </div>
