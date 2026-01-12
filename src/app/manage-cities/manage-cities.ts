@@ -18,12 +18,18 @@ export class ManageCities {
   pattern:string = ""
   degrees:string = ""
   myCities:any[] = []
+  citiesLoaded:boolean = false
+
+  constructor() {
+    this.getFavoriteCities();
+  }
 
   getFavoriteCities() {
     //OPCION #1: recibimos un Observable (locker de metacrilato de Amazon) --> nos tenemos que suscribir
     this.userData.getFavoriteCities().subscribe(
       (data:any) => {
-        console.log(data.ciudades_favoritas)
+        this.myCities = data.ciudades_favoritas
+        this.citiesLoaded = true
       }
     )
   }
