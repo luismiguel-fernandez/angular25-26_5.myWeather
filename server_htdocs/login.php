@@ -24,7 +24,7 @@ try {
 
             // Verificamos el hash de la contraseña
             if ($usuario && password_verify($user_pass, $usuario['password_hash'])) {
-                echo json_encode(["success" => true, "message" => "Inicio de sesión exitoso."]);
+                echo json_encode(["success" => true, "message" => "Inicio de sesión exitoso.", "usuario_id" => $usuario['id']]);
                 // Aquí podrías redirigir o iniciar sesión
             } else {
                 echo json_encode(["success" => false, "message" => "Usuario o contraseña incorrectos."]);
