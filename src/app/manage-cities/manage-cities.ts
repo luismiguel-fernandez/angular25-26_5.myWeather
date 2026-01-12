@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FavCityByPatternPipe } from '../fav-city-by-pattern-pipe';
 import { CityCard } from '../city-card/city-card';
 import { FavCityByColderTempPipe } from '../fav-city-by-colder-temp-pipe';
+import { UserData } from '../user-data';
 
 @Component({
   selector: 'app-manage-cities',
@@ -13,11 +14,17 @@ import { FavCityByColderTempPipe } from '../fav-city-by-colder-temp-pipe';
 })
 export class ManageCities {
 
-  private userPrefs = inject(UserPrefs)
+  private userData = inject(UserData)
   pattern:string = ""
   degrees:string = ""
+  myCities:any[] = []
 
   getFavoriteCities() {
-    return this.userPrefs.getFavoriteCities()
+    //OPCION #1: recibimos un Observable (locker de metacrilato de Amazon) --> nos tenemos que suscribir
+    this.userData.getFavoriteCities().subscribe(
+      (data:any) => {
+        console.log(data.ciudades_favoritas)
+      }
+    )
   }
 }

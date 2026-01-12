@@ -1,7 +1,7 @@
 <div class="input-group mb-3">
     @if (logged) {
-        <span>nombre de usuario</span>
-        <button class="btn btn-outline-secondary">logout</button>
+        <span>Hola, {{username}} (id: {{getUserId()}})</span>
+        <button (click)="logout()" class="btn btn-outline-secondary">logout</button>
     } @else {
         <input #username type="text" class="form-control" placeholder="Username" aria-label="Username">
         <span class="input-group-text"></span>

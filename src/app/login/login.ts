@@ -10,8 +10,18 @@ import { UserData } from '../user-data';
 export class Login {
   logged: boolean = false;
   username: string = "";
+  //userId: string = "";
 
   private userData = inject(UserData)
+
+  getUserId() {
+    return this.userData.getUserId();
+  }
+
+  logout() {
+    this.logged = false;
+    this.username = "";
+  }
 
   tryLogin(username: string, password: string) {
     if (username.length > 0 && password.length > 0) {
@@ -20,6 +30,8 @@ export class Login {
           if (data.success) {
             this.logged = true;
             this.username = username;
+            //this.userId = data.usuario_id;
+            this.userData.setUserId(data.usuario_id);
           } else {
             alert(data.message);
           }
