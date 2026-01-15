@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { WeatherData } from '../weather-data';
 
 @Component({
   selector: 'app-city-card',
@@ -7,6 +8,18 @@ import { Component, Input } from '@angular/core';
   styles: ``,
 })
 export class CityCard {
-  @Input() city:any
+  @Input() cityId:string = ""
+
+  private weatherData = inject(WeatherData)
+
+  cityData:any = null
+
+  ngOnInit() {
+    this.weatherData.getById(this.cityId).subscribe(
+      (data:any) => {
+        this.cityData = data
+      }
+    )
+  }
 
 }

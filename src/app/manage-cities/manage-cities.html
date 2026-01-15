@@ -15,15 +15,15 @@
 
 <div class="row row-cols-md-5">
 	<!-- @for (city of myCities | favCityByPattern:pattern | favCityByColderTemp:degrees; track city.id) { -->
-   @if (!citiesLoaded) {
+   <!-- @if (!citiesLoaded) {
     <img src="loading_icon.gif" alt="loading" />
-   } @else {
-    @if (myCities && myCities.length == 0) {
+   } @else { -->
+    @if (getMyCities().length == 0) {
       <span>User has no favorite cities</span>
     } @else {
-      @for (city of myCities; track city.id) {
-        <app-city-card [city]="city"></app-city-card>
+      @for (city of getMyCities(); track city) {
+        <app-city-card [cityId]="city"></app-city-card>
       }
     }
-	}
+	<!-- } -->
 </div>

@@ -17,20 +17,9 @@ export class ManageCities {
   private userData = inject(UserData)
   pattern:string = ""
   degrees:string = ""
-  myCities:any[] = []
-  citiesLoaded:boolean = false
+  // citiesLoaded:boolean = false
 
-  constructor() {
-    this.getFavoriteCities();
-  }
-
-  getFavoriteCities() {
-    //OPCION #1: recibimos un Observable (locker de metacrilato de Amazon) --> nos tenemos que suscribir
-    this.userData.getFavoriteCities().subscribe(
-      (data:any) => {
-        this.myCities = data.ciudades_favoritas
-        this.citiesLoaded = true
-      }
-    )
+  getMyCities() {
+    return this.userData.getMyCities();
   }
 }

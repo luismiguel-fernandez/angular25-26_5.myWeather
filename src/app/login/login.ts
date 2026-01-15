@@ -32,6 +32,12 @@ export class Login {
             this.username = username;
             //this.userId = data.usuario_id;
             this.userData.setUserId(data.usuario_id);
+            //recuperamos YA las ciudades favoritas
+            this.userData.getFavoriteCities().subscribe(
+              (data:any) => {
+                this.userData.setMyCities(data.ciudades_favoritas);
+              }
+            )
           } else {
             alert(data.message);
           }
