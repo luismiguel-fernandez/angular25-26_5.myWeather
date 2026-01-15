@@ -1,6 +1,6 @@
 <div class="input-group mb-3">
-    @if (logged) {
-        <span>Hola, {{username}} (id: {{getUserId()}})</span>
+    @if (getLogged()) {
+        <span>Hola, {{getUsername()}} (id: {{getUserId()}})</span>
         <button (click)="logout()" class="btn btn-outline-secondary">logout</button>
     } @else {
         <input #username type="text" class="form-control" placeholder="Username" aria-label="Username">

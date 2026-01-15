@@ -8,19 +8,15 @@ import { UserData } from '../user-data';
   styles: ``,
 })
 export class Login {
-  logged: boolean = false;
-  username: string = "";
-  //userId: string = "";
-
   private userData = inject(UserData)
 
-  getUserId() {
-    return this.userData.getUserId();
-  }
+  getLogged() { return this.userData.getLogged(); }
+  getUserId() { return this.userData.getUserId();}
+  getUsername() { return this.userData.getUsername(); }
 
   logout() {
-    this.logged = false;
-    this.username = "";
+    this.userData.setLogged(false)
+    this.userData.setUsername("")
   }
 
   tryLogin(username: string, password: string) {
@@ -28,8 +24,8 @@ export class Login {
       this.userData.tryLogin(username, password).subscribe(
         (data: any) => {
           if (data.success) {
-            this.logged = true;
-            this.username = username;
+            this.userData.setLogged(true);
+            this.userData.setUsername(username);
             //this.userId = data.usuario_id;
             this.userData.setUserId(data.usuario_id);
             //recuperamos YA las ciudades favoritas
